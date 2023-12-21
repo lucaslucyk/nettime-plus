@@ -1,0 +1,10 @@
+{
+    // "[javascript]": {
+    //     "editor.maxTokenizationLineLength": 2500,
+    //     "editor.formatOnSave": true
+    // },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll": true
+    },
+}
