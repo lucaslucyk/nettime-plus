@@ -1,0 +1,90 @@
+/* Sftp.css */
+
+.sftp-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container,
+.file-list-container {
+  border: 1px solid #333333;
+  border-radius: 5px;
+  min-height: 200px;
+  padding: 10px;
+  margin-bottom: 20px;
+  overflow-y: auto;
+}
+
+.login-container {
+    background-color: #121212;
+    color: #fff;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.file-list-container {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  word-wrap: break-word;
+}
+
+.user-message {
+  text-align: right;
+  background-color: #4caf50;
+  color: white;
+}
+
+.response-message {
+  text-align: left;
+  background-color: #212121;
+}
+
+.input-container {
+  display: flex;
+}
+
+.message-input {
+  flex: 1;
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #333333;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: #212121;
+}
+
+.send-button {
+  padding: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.selected-file-info {
+  margin-top: 10px;
+  background-color: #333333;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.login-input {
+    padding: 5px;
+    border: 1px solid #333333;
+    border-radius: 5px;
+    color: #ffffff;
+    background-color: #212121;
+}
