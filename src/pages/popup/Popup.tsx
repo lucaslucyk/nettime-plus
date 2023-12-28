@@ -3,12 +3,14 @@ import logo from '@assets/img/logo.png';
 import '@pages/popup/Popup.css';
 import useStorage from '@src/shared/hooks/useStorage';
 import exampleThemeStorage from '@src/shared/storages/exampleThemeStorage';
+import logginStorage from '@src/shared/storages/logginStorage';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import Applications from '@root/src/pages/popup/Applications';
 
 const Popup = () => {
   const theme = useStorage(exampleThemeStorage);
+  const logged = useStorage(logginStorage);
 
   return (
     <div
@@ -23,7 +25,8 @@ const Popup = () => {
           target="_blank"
           rel="noopener noreferrer">
           <img src={logo} className="App-logo" alt="logo" />
-          <br />netTime+
+          <br />
+          netTime+
         </a>
 
         {/* <button
@@ -32,8 +35,20 @@ const Popup = () => {
             color: theme === 'light' ? '#000' : '#fff',
           }}
           onClick={exampleThemeStorage.toggle}>
-          Toggle theme
+          Light/Dark
         </button> */}
+        {logged === 'true' ? (
+          <button
+            style={{
+              backgroundColor: theme === 'light' ? '#fff' : '#000',
+              color: theme === 'light' ? '#000' : '#fff',
+            }}
+            onClick={logginStorage.toggle}>
+            Logout
+          </button>
+        ) : (
+          <></>
+        )}
 
         <Applications />
       </header>

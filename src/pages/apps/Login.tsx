@@ -1,23 +1,26 @@
 // Login.tsx
 import React, { useState } from 'react';
 import '@pages/apps/Sftp.css';
+import logginStorage from '@src/shared/storages/logginStorage';
 
 interface Credentials {
   username: string;
   password: string;
 }
 
-interface LoginProps {
-  onLogin: (credentials: Credentials) => void;
-}
+// interface LoginProps {
+//   onLogin: (credentials: Credentials) => void;
+// }
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+// const Login: React.FC<LoginProps> = ({ onLogin }) => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const handleLogin = () => {
     const credentials: Credentials = { username, password };
-    onLogin(credentials);
+    // onLogin(credentials);
+    logginStorage.toggle();
   };
 
   return (

@@ -36,11 +36,13 @@ body {
     text-align: right;
     background-color: #1e1e1e;
     color: white;
+    margin-left: 10%;
   }
   
   .response-message {
     text-align: left;
     background-color: #333333;
+    margin-right: 10%;
   }
   
   .input-container {
