@@ -47,6 +47,12 @@ interface Message {
   
       setInputText('');
     };
+
+    const handleKeyDown = async (e: React.KeyboardEvent<HTMLElement>) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        handleSendMessage();
+      }
+    };
   
     return (
       <div className="chat-container">
@@ -67,6 +73,7 @@ interface Message {
             onChange={handleInputChange}
             className="message-input"
             placeholder="Escribe tu pregunta..."
+            onKeyDown={handleKeyDown}
           />
           <button onClick={handleSendMessage} className="send-button">
             Enviar

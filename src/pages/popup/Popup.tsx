@@ -2,14 +2,14 @@
 import logo from '@assets/img/logo.png';
 import '@pages/popup/Popup.css';
 import useStorage from '@src/shared/hooks/useStorage';
-import exampleThemeStorage from '@src/shared/storages/exampleThemeStorage';
+import themeStorage from '@src/shared/storages/themeStorage';
 import authStorage from '@src/shared/storages/authStorage';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import Applications from '@src/pages/popup/Applications';
 
 const Popup = () => {
-  const theme = useStorage(exampleThemeStorage);
+  const theme = useStorage(themeStorage);
   const accessToken = useStorage(authStorage);
 
   const logoutHandler = async () => {
@@ -35,7 +35,7 @@ const Popup = () => {
         <div className="main-buttons">
           <button
             className='control-btn'
-            onClick={exampleThemeStorage.toggle}>
+            onClick={themeStorage.toggle}>
             Light/Dark
           </button>
           {accessToken != '' && accessToken != null ? (

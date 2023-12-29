@@ -1,20 +1,13 @@
 // Login.tsx
 import React, { useState } from 'react';
 import '@pages/apps/Sftp.css';
-// import logginStorage from '@src/shared/storages/logginStorage';
 import { login } from '@root/src/shared/services/auth';
-
-// import useStorage from '@src/shared/hooks/useStorage';
 import authStorage from '@src/shared/storages/authStorage';
 
 interface Credentials {
   username: string;
   password: string;
 }
-
-// interface LoginProps {
-//   onLogin: (credentials: Credentials) => void;
-// }
 
 // const Login: React.FC<LoginProps> = ({ onLogin }) => {
 const Login: React.FC = () => {
@@ -41,6 +34,12 @@ const Login: React.FC = () => {
       cleanInputs();
     }
   };
+  
+  const handleKeyDown = async (e: React.KeyboardEvent<HTMLElement>) => {
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
 
   return (
     <div className="login-container">
@@ -58,6 +57,7 @@ const Login: React.FC = () => {
         placeholder="Contraseña"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        onKeyDown={handleKeyDown}
       />
       <button className="send-button" onClick={handleLogin}>
         Iniciar sesión

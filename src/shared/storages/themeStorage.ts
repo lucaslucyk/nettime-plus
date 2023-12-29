@@ -10,7 +10,7 @@ const storage = createStorage<Theme>('theme-storage-key', 'dark', {
   storageType: StorageType.Local,
 });
 
-const exampleThemeStorage: ThemeStorage = {
+const themeStorage: ThemeStorage = {
   ...storage,
   // TODO: extends your own methods
   toggle: () => {
@@ -20,4 +20,4 @@ const exampleThemeStorage: ThemeStorage = {
   },
 };
 
-export default exampleThemeStorage;
+export default themeStorage;
