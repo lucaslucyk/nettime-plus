@@ -1,12 +1,12 @@
 import { BaseStorage, createStorage, StorageType } from '@src/shared/storages/base';
 
-type Theme = 'light' | 'dark';
+type Theme = 'dark' | 'light';
 
 type ThemeStorage = BaseStorage<Theme> & {
   toggle: () => void;
 };
 
-const storage = createStorage<Theme>('theme-storage-key', 'light', {
+const storage = createStorage<Theme>('theme-storage-key', 'dark', {
   storageType: StorageType.Local,
 });
 

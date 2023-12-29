@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import Login from './Login';
 import FileList from './FileList';
 import '@pages/apps/Sftp.css';
-import useStorage from '@root/src/shared/hooks/useStorage';
-import logginStorage from '@root/src/shared/storages/logginStorage';
+// import useStorage from '@root/src/shared/hooks/useStorage';
+// import logginStorage from '@root/src/shared/storages/logginStorage';
 
 const Sftp: React.FC = () => {
   // const [isLoggedIn, setLoggedIn] = useState(false);
-  const logged = useStorage(logginStorage);
+  // const logged = useStorage(logginStorage);
   const [selectedFile, setSelectedFile] = useState<string | null>(null);
 
   // const handleLogin = (credentials: any) => {
@@ -26,12 +26,7 @@ const Sftp: React.FC = () => {
 
   return (
     <div className="sftp-container">
-      {logged === 'true' ? (
-        <FileList files={files} onFileClick={handleFileClick} />
-      ) : (
-        // <Login onLogin={handleLogin} />
-        <Login />
-      )}
+      <FileList files={files} onFileClick={handleFileClick} />
       {selectedFile && <div className="selected-file-info">Archivo seleccionado: {selectedFile}</div>}
     </div>
   );

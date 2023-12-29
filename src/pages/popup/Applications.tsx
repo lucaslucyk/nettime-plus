@@ -6,13 +6,14 @@ import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 
 import useStorage from '@src/shared/hooks/useStorage';
-import logginStorage from '@src/shared/storages/logginStorage';
+import authStorage from '@src/shared/storages/authStorage';
+
 
 import Chat from '@root/src/pages/apps/Chat';
 import Sftp from '@root/src/pages/apps/Sftp';
 
 const Applications: React.FC = () => {
-  const logged = useStorage(logginStorage);
+  const accessToken = useStorage(authStorage);
   // const [isLoggedIn, setLoggedIn] = useState(logged);
 
   // const handleLogin = (credentials: any) => {
@@ -25,7 +26,7 @@ const Applications: React.FC = () => {
   return (
     <div className="App-Applications">
       {/* {logged === 'true' ? <Chat /> : <Login onLogin={handleLogin} />} */}
-      {logged === 'true' ? <Chat /> : <Login />}
+      {accessToken != '' && accessToken != null ? <Chat /> : <Login />}
       {/* <Sftp /> */}
     </div>
   );

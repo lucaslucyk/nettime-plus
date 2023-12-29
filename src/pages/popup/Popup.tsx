@@ -1,16 +1,20 @@
-import React from 'react';
+// import React from 'react';
 import logo from '@assets/img/logo.png';
 import '@pages/popup/Popup.css';
 import useStorage from '@src/shared/hooks/useStorage';
 import exampleThemeStorage from '@src/shared/storages/exampleThemeStorage';
-import logginStorage from '@src/shared/storages/logginStorage';
+import authStorage from '@src/shared/storages/authStorage';
 import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
-import Applications from '@root/src/pages/popup/Applications';
+import Applications from '@src/pages/popup/Applications';
 
 const Popup = () => {
   const theme = useStorage(exampleThemeStorage);
-  const logged = useStorage(logginStorage);
+  const accessToken = useStorage(authStorage);
+
+  const logoutHandler = async () => {
+    await authStorage.set('');
+  };
 
   return (
     <div
@@ -28,27 +32,22 @@ const Popup = () => {
           <br />
           netTime+
         </a>
-
-        {/* <button
-          style={{
-            backgroundColor: theme === 'light' ? '#fff' : '#000',
-            color: theme === 'light' ? '#000' : '#fff',
-          }}
-          onClick={exampleThemeStorage.toggle}>
-          Light/Dark
-        </button> */}
-        {logged === 'true' ? (
+        <div className="main-buttons">
           <button
-            style={{
-              backgroundColor: theme === 'light' ? '#fff' : '#000',
-              color: theme === 'light' ? '#000' : '#fff',
-            }}
-            onClick={logginStorage.toggle}>
-            Logout
+            className='control-btn'
+            onClick={exampleThemeStorage.toggle}>
+            Light/Dark
           </button>
-        ) : (
-          <></>
-        )}
+          {accessToken != '' && accessToken != null ? (
+            <button
+              className='control-btn'
+              onClick={logoutHandler}>
+              Logout
+            </button>
+          ) : (
+            <></>
+          )}
+        </div>
 
         <Applications />
       </header>
