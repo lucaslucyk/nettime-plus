@@ -2,8 +2,19 @@
   display: flex;
   flex-flow: column;
   justify-content: center;
+  /* gap: 1rem; */
+  flex-wrap: wrap;
+  flex: 1;
+  align-content: center;
+}
+
+.app-selector {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
   flex: 1;
   align-content: center;
+  flex-direction: row;
 }

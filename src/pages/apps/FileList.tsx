@@ -32,7 +32,7 @@ const FileList: React.FC = () => {
           ))}
         </div>
       </div>
-      <div className="selected-file-info">no file selected</div>
+      {/* <div className="selected-file-info">no file selected</div> */}
     </>
   );
 };

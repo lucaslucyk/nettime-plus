@@ -72,7 +72,7 @@ interface Message {
             value={inputText}
             onChange={handleInputChange}
             className="message-input"
-            placeholder="Escribe tu pregunta..."
+            placeholder="Cómo crear una jornada?"
             onKeyDown={handleKeyDown}
           />
           <button onClick={handleSendMessage} className="send-button">

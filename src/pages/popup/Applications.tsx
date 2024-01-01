@@ -8,12 +8,16 @@ import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import useStorage from '@src/shared/hooks/useStorage';
 import authStorage from '@src/shared/storages/authStorage';
 
-
 import Chat from '@root/src/pages/apps/Chat';
 import Sftp from '@root/src/pages/apps/Sftp';
 
 const Applications: React.FC = () => {
   const accessToken = useStorage(authStorage);
+  const [activeApp, setActiveApp] = useState<string | null>(null);
+  const handleButtonClick = (appName: string) => {
+    setActiveApp(appName);
+  };
+
   // const [isLoggedIn, setLoggedIn] = useState(logged);
 
   // const handleLogin = (credentials: any) => {
@@ -26,7 +30,23 @@ const Applications: React.FC = () => {
   return (
     <div className="App-Applications">
       {/* {logged === 'true' ? <Chat /> : <Login onLogin={handleLogin} />} */}
-      {accessToken != '' && accessToken != null ? <><Sftp /></> : <Login />}
+      {accessToken != '' && accessToken != null ? (
+        // <>
+        //   <Sftp />
+        // </>
+        <>
+          <div className="app-selector">
+            <button onClick={() => handleButtonClick('Chat')} className='send-button'>Chat</button>
+            <button onClick={() => handleButtonClick('Sftp')} className='send-button'>Sftp</button>
+          </div>
+          <>
+            {activeApp === 'Chat' && <Chat />}
+            {activeApp === 'Sftp' && <Sftp />}
+          </>
+        </>
+      ) : (
+        <Login />
+      )}
       {/* <Sftp /> */}
     </div>
   );

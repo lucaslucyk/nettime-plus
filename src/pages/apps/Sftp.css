@@ -3,7 +3,7 @@
 .sftp-container {
   max-width: 400px;
   margin: auto;
-  padding: 20px;
+  /* padding: 20px; */
   display: flex;
   flex-direction: column;
   font-size: 0.8rem;
