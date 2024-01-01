@@ -1,24 +1,39 @@
 // FileList.tsx
 import React from 'react';
 import '@pages/apps/Sftp.css';
+import { listDir } from '@src/shared/services/sftp';
 
-interface FileListProps {
-  files: string[];
-  onFileClick: (filename: string) => void;
-}
+const isFile = (name: string): boolean => {
+  return name !== '.' && name.includes('.') && !name.includes('..');
+};
 
-const FileList: React.FC<FileListProps> = ({ files, onFileClick }) => {
+const FileList: React.FC = () => {
+  const params = {path: "/"}
+  const files = listDir(params);
   return (
-    <div className="file-list-container">
-      <h2>Lista de Archivos</h2>
-      <ul>
-        {files.map((file) => (
-          <li key={file} onClick={() => onFileClick(file)}>
-            {file}
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <div className="file-list-container">
+        {/* <h2>Lista de Archivos</h2> */}
+        <div className="files-tree">
+          {files.map(file => (
+            <div key={file} className="file-item">
+              <div className="file-content">{file}</div>
+              <div className="file-controls">
+                {isFile(file) ? (
+                  <>
+                    <button className="send-button">⏬</button>
+                    <button className="send-button">❌</button>
+                  </>
+                ) : (
+                  <button className="send-button">👁️</button>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="selected-file-info">no file selected</div>
+    </>
   );
 };
 

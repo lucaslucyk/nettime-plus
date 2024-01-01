@@ -26,7 +26,7 @@ const Applications: React.FC = () => {
   return (
     <div className="App-Applications">
       {/* {logged === 'true' ? <Chat /> : <Login onLogin={handleLogin} />} */}
-      {accessToken != '' && accessToken != null ? <Chat /> : <Login />}
+      {accessToken != '' && accessToken != null ? <><Sftp /></> : <Login />}
       {/* <Sftp /> */}
     </div>
   );
