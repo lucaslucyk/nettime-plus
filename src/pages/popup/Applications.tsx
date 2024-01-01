@@ -10,12 +10,15 @@ import authStorage from '@src/shared/storages/authStorage';
 
 import Chat from '@root/src/pages/apps/Chat';
 import Sftp from '@root/src/pages/apps/Sftp';
+import currentAppStorage from '@root/src/shared/storages/currentAppStorage';
 
 const Applications: React.FC = () => {
   const accessToken = useStorage(authStorage);
-  const [activeApp, setActiveApp] = useState<string | null>(null);
+  const activeApp = useStorage(currentAppStorage);
+  // const [activeApp, setActiveApp] = useState<string | null>(null);
   const handleButtonClick = (appName: string) => {
-    setActiveApp(appName);
+    //setActiveApp(appName);
+    currentAppStorage.set(appName);
   };
 
   // const [isLoggedIn, setLoggedIn] = useState(logged);
@@ -36,8 +39,12 @@ const Applications: React.FC = () => {
         // </>
         <>
           <div className="app-selector">
-            <button onClick={() => handleButtonClick('Chat')} className='send-button'>Chat</button>
-            <button onClick={() => handleButtonClick('Sftp')} className='send-button'>Sftp</button>
+            <button onClick={() => handleButtonClick('Chat')} className="send-button">
+              Chat
+            </button>
+            <button onClick={() => handleButtonClick('Sftp')} className="send-button">
+              Sftp
+            </button>
           </div>
           <>
             {activeApp === 'Chat' && <Chat />}
