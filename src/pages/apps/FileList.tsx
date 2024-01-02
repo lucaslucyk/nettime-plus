@@ -1,12 +1,10 @@
 // FileList.tsx
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import '@pages/apps/Sftp.css';
 import { getFileReader, listDir, getBlob, removeObject } from '@src/shared/services/sftp';
-import { useState } from 'react';
 import useStorage from '@root/src/shared/hooks/useStorage';
 import authStorage from '@root/src/shared/storages/authStorage';
-import currentAppStorage from '@root/src/shared/storages/currentAppStorage';
-import { useEffect } from 'react';
+// import currentAppStorage from '@root/src/shared/storages/currentAppStorage';
 
 const isFile = (name: string): boolean => {
   return name !== '.' && name.includes('.') && !name.includes('..');
@@ -124,7 +122,7 @@ const FileList: React.FC<FileListParams> = ({ appId }) => {
         <div className="files-tree">
           {dirItems.map(fileName => (
             <div key={fileName} className="file-item">
-              <div className="file-content">{fileName}</div>
+              <div className="file-content">{fileName ? fileName : "Loading content..."}</div>
               <div className="file-controls">
                 {isFile(fileName) ? (
                   <>
@@ -140,7 +138,7 @@ const FileList: React.FC<FileListParams> = ({ appId }) => {
                     👁️
                   </button>
                 ) : (
-                  <>Loading content...</>
+                  <></>
                 )}
               </div>
             </div>

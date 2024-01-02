@@ -1,5 +1,5 @@
 // Sftp.tsx
-import React, { useState } from 'react';
+import React from 'react';
 // import Login from './Login';
 import FileList from './FileList';
 import '@pages/apps/Sftp.css';
