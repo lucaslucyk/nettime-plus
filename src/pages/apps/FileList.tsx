@@ -1,7 +1,7 @@
 // FileList.tsx
 import React from 'react';
 import '@pages/apps/Sftp.css';
-import { listDir } from '@src/shared/services/sftp';
+import { getFileReader, listDir, getBlob, removeObject } from '@src/shared/services/sftp';
 import { useState } from 'react';
 import useStorage from '@root/src/shared/hooks/useStorage';
 import authStorage from '@root/src/shared/storages/authStorage';
@@ -49,6 +49,28 @@ interface FileListParams {
   appId: string;
 }
 
+interface BlobDownloadParams {
+  blob: Blob;
+  fileName: string;
+}
+
+const downloadBlob = ({ blob, fileName }: BlobDownloadParams): void => {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = fileName;
+
+  const handleOnDownload = () => {
+    setTimeout(() => {
+      URL.revokeObjectURL(url);
+      a.removeEventListener('click', handleOnDownload);
+    }, 150);
+  };
+
+  a.addEventListener('click', handleOnDownload, false);
+  a.click();
+};
+
 const FileList: React.FC<FileListParams> = ({ appId }) => {
   const [currentPath, setCurrentPath] = useState('/');
   const accessToken = useStorage(authStorage);
@@ -67,11 +89,31 @@ const FileList: React.FC<FileListParams> = ({ appId }) => {
 
   const fileButtonHandler =
     ({ fileName, action }: ButtonHandlerParams) =>
-    () => {
+    async () => {
       const filePath = buildPath(currentPath, fileName);
       // console.log(filePath + ' - ' + action);
       if (!isFile(fileName)) {
         setCurrentPath(filePath);
+        return;
+      }
+
+      if (action === 'download') {
+        const params = { path: filePath, accessToken: accessToken, appId: appId };
+        const reader = await getFileReader(params);
+        const blob = await getBlob(reader);
+        downloadBlob({ blob, fileName });
+        return;
+      }
+
+      if (action === 'remove') {
+        const params = { path: filePath, accessToken: accessToken, appId: appId };
+        await removeObject(params);
+        // setCurrentPath(currentPath);
+
+        // refresh content
+        params.path = currentPath;
+        const res = await listDir(params);
+        setDirItems(res);
       }
     };
 
@@ -89,14 +131,16 @@ const FileList: React.FC<FileListParams> = ({ appId }) => {
                     <button className="send-button" onClick={fileButtonHandler({ fileName, action: 'download' })}>
                       ⏬
                     </button>
-                    <button className="send-button" onClick={fileButtonHandler({ fileName, action: 'delete' })}>
+                    <button className="send-button" onClick={fileButtonHandler({ fileName, action: 'remove' })}>
                       ❌
                     </button>
                   </>
-                ) : (
+                ) : fileName ? (
                   <button className="send-button" onClick={fileButtonHandler({ fileName, action: 'listdir' })}>
                     👁️
                   </button>
+                ) : (
+                  <>Loading content...</>
                 )}
               </div>
             </div>

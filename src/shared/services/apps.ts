@@ -1,6 +1,6 @@
 const BASE_URL: string = 'http://127.0.0.1:8000';
 // TODO: change this to .../me/apps on backend
-const USER_APPS_URL: string = `${BASE_URL}/users/me/apps/`;
+const USER_APPS_URL: string = `${BASE_URL}/me/apps/`;
 
 interface GetUserAppsParams {
   accessToken: string;

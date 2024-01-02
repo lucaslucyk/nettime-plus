@@ -1,7 +1,8 @@
 /* Sftp.css */
 
 .sftp-container {
-  max-width: 400px;
+  max-width: 320px;
+  min-width: 280px;
   margin: auto;
   /* padding: 20px; */
   display: flex;
