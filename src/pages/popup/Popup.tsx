@@ -8,6 +8,7 @@ import withSuspense from '@src/shared/hoc/withSuspense';
 import withErrorBoundary from '@src/shared/hoc/withErrorBoundary';
 import Applications from '@src/pages/popup/Applications';
 import currentAppStorage from '@root/src/shared/storages/currentAppStorage';
+import userAppsStorage from '@root/src/shared/storages/userApps';
 
 const Popup = () => {
   const theme = useStorage(themeStorage);
@@ -15,7 +16,8 @@ const Popup = () => {
 
   const logoutHandler = async () => {
     await authStorage.set('');
-    currentAppStorage.set('');
+    await currentAppStorage.set('');
+    userAppsStorage.clearApps();
   };
 
   return (

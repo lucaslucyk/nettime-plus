@@ -3,11 +3,14 @@ import React, { useState } from 'react';
 import '@pages/apps/Sftp.css';
 import { login } from '@root/src/shared/services/auth';
 import authStorage from '@src/shared/storages/authStorage';
+import { getUserApps } from '@root/src/shared/services/apps';
+import userAppsStorage from '@root/src/shared/storages/userApps';
 
 interface Credentials {
   username: string;
   password: string;
 }
+
 
 // const Login: React.FC<LoginProps> = ({ onLogin }) => {
 const Login: React.FC = () => {
@@ -15,10 +18,10 @@ const Login: React.FC = () => {
   const [password, setPassword] = useState('');
   // const accessToken = useStorage(authStorage);
 
-  const cleanInputs = () => {
-    setUsername('');
-    setPassword('');
-  };
+  // const cleanInputs = () => {
+  //   setUsername('');
+  //   setPassword('');
+  // };
 
   const handleLogin = async () => {
     if (username === '' || password === '') {
@@ -27,11 +30,17 @@ const Login: React.FC = () => {
     }
     const credentials: Credentials = { username, password };
     try {
-      const token = await login(credentials);
-      await authStorage.set(token);
+      const accessToken = await login(credentials);
+      await authStorage.set(accessToken);
+
+      // get and set user apps
+      // const accessToken: Token = {token}
+      const userApps = await getUserApps({accessToken})
+      userAppsStorage.setApps(userApps)
+
     } catch (error) {
       alert(error.toString());
-      cleanInputs();
+      // cleanInputs();
     }
   };
   
